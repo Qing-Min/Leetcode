@@ -1,27 +1,18 @@
 int isAnagram(char* s, char* t) {
-    char * stemp=s;
-    char * ttemp=t;
-    while(*stemp!='\0'){
-        ttemp=t;
-        while(*ttemp!='\0'){
-            if(*stemp==*ttemp){
-                *stemp='#';
-                *ttemp='#';
-                break;
-            }
-            ttemp++;
-        }
-        if('\0'==*ttemp){
-            return 0;
-        }
-        stemp++;
+    int charsCount[26]={0};
+    int i=0;
+    while('\0'!=*s){
+        charsCount[(*s)-97]++;
+        s++;
     }
-    ttemp=t;
-    while(*ttemp!='\0'){
-        if(*ttemp!='#'){
+    while('\0'!=*t){
+        charsCount[(*t)-97]--;
+        t++;
+    }
+    for(;i<26;i++){
+        if(charsCount[i]!=0){
             return 0;
         }
-        ttemp++;
     }
     return 1;
 }
