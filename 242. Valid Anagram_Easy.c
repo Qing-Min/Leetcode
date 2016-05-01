@@ -1,4 +1,4 @@
-bool isAnagram(char* s, char* t) {
+int isAnagram(char* s, char* t) {
     char * stemp=s;
     char * ttemp=t;
     while(*stemp!='\0'){
@@ -11,17 +11,17 @@ bool isAnagram(char* s, char* t) {
             }
             ttemp++;
         }
-        if(*ttemp='\0'){
-            return false;
+        if('\0'==*ttemp){
+            return 0;
         }
         stemp++;
     }
     ttemp=t;
     while(*ttemp!='\0'){
         if(*ttemp!='#'){
-            return false;
+            return 0;
         }
         ttemp++;
     }
-    return true;
+    return 1;
 }
