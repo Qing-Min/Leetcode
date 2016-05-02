@@ -1,20 +1,24 @@
-int * sort(int * nums,int numsSize){
-    int n=0;
+//主数个数大于一半，去除每一对不同的数后，剩下的数字就是主数
+int majorityElement(int* nums, int numsSize) {
+    int candidate=0;
+    int counter=0;
     int i=0;
-    int temp;
-    for(n=0;n<numsSize-1;n++){
-        for(i=0;i<numsSize-1-n;i++){
-            if( *(nums+i)<*(nums+i+1)){
-                temp=*(nums+i);
-                *(nums+i)=*(nums+i+1);
-                *(nums+i+1)=temp;            
-            }
+    if(numsSize==1){
+        return *nums;
+    }
+    for(;i<numsSize;i++){
+        
+        if( *(nums+i)==candidate ){
+            counter++;
+        }
+        else if(counter==0){
+            candidate=*(nums+i);
+            counter=1;
+        }
+        else{
+            counter--;
         }
     }
-    return nums;
-}
-int majorityElement(int* nums, int numsSize) {
-    nums=sort(nums,numsSize);
-    return *(nums+(numsSize/2));
+    return candidate;
     
 }
