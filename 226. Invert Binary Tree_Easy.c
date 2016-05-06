@@ -1,15 +1,36 @@
-void moveZeroes(int* nums, int numsSize) {
-    int position=0;
-    int flag=0;
-    for(int i=0;i<numsSize;i++){
-        if( (*(nums+i))!=0 ){
-            *(nums+(position++))=*(nums+i);
-            if(1==flag){
-                *(nums+i)=0;
-            }
-        }
-        else{
-            flag=1;
-        }
+/*Invert a binary tree.
+
+     4
+   /   \
+  2     7
+ / \   / \
+1   3 6   9
+to
+     4
+   /   \
+  7     2
+ / \   / \
+9   6 3   1*/
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+ 
+struct TreeNode* invertTree(struct TreeNode* root) {
+    if(root==NULL){return NULL;}
+    if(root->right==NULL && root->left==NULL){return root;}
+    else{
+        root->right=invertTree(root->right);
+        root->left=invertTree(root->left);
+        struct TreeNode* temp;
+        temp=root->right;
+        root->right=root->left;
+        root->left=temp;
     }
+    return root;
+        
 }
