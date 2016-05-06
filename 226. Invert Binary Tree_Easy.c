@@ -22,15 +22,11 @@ to
  
 struct TreeNode* invertTree(struct TreeNode* root) {
     if(root==NULL){return NULL;}
-    if(root->right==NULL && root->left==NULL){return root;}
     else{
-        root->right=invertTree(root->right);
-        root->left=invertTree(root->left);
         struct TreeNode* temp;
-        temp=root->right;
-        root->right=root->left;
-        root->left=temp;
+        temp=invertTree(root->left);
+        root->left=invertTree(root->right);
+        root->right=temp;
     }
     return root;
-        
 }
