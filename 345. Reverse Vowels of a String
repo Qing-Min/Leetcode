@@ -1,0 +1,51 @@
+char* reverseVowels(char* s) {
+    if(s!=0){
+        char *stemp=s;
+        int numberOfVowels=0,totalNumber=0; 
+        while(*stemp!='\0'){
+            if( (*stemp=='a')||
+                (*stemp=='e')||
+                (*stemp=='i')||
+                (*stemp=='o')||
+                (*stemp=='u')||
+                (*stemp=='A')||
+                (*stemp=='E')||
+                (*stemp=='I')||
+                (*stemp=='O')||
+                (*stemp=='U')
+            ){
+                numberOfVowels++;
+            }
+            totalNumber++;
+            stemp++;
+        }
+		int * p=(int *)malloc(numberOfVowels*sizeof(int));
+		if(p==NULL){
+			return NULL;
+		}
+        int i=0;
+        int j=0;
+        for(i=0;i<totalNumber;i++){
+            if( (s[i]=='a')||
+                (s[i]=='e')||
+                (s[i]=='i')||
+                (s[i]=='o')||
+                (s[i]=='u')||
+                (s[i]=='A')||
+                (s[i]=='E')||
+                (s[i]=='I')||
+                (s[i]=='O')||
+                (s[i]=='U')
+            ){
+                p[j++]=(int)&s[i];
+            }
+        }
+        for(i=0;i<(numberOfVowels/2);i++){
+            char tempc=*((char *)p[i]);
+            *((char *)p[i])=*((char *)p[numberOfVowels-1-i]);
+			*((char *)p[numberOfVowels-1-i])=tempc;
+        }
+    }
+    return s;
+    
+}
