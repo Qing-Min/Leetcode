@@ -1,0 +1,72 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) {
+    if(l1==NULL||l2==NULL){
+        if(l1==NULL){return l2;}
+        if(l2==NULL){return l1;}
+    }
+    struct ListNode* root;
+     if((l1->val)>(l2->val)){
+        root=l2;
+        l2=l2->next;
+		if(l2==NULL){
+          root->next=l1;
+        }
+    }
+    else{
+        root=l1;
+        l1=l1->next;
+		if(l1==NULL){
+          root->next=l2;
+        }
+    }
+    struct ListNode* temp=root;
+    while((l1!=NULL)&&(l2!=NULL)){
+        if(temp->next==l1){
+            if((l1->val)>(l2->val)){
+                temp->next=l2;
+                temp=l2;
+                l2=l2->next;
+                if(l2==NULL){
+                    temp->next=l1;
+                    break;
+                }
+            }
+            else{
+                temp->next=l1;
+                temp=l1;
+                l1=l1->next;
+                if(l1==NULL){
+                    temp->next=l2;
+                    break;
+                }
+            }    
+        }
+        if(temp->next==l2){
+            if((l1->val)<(l2->val)){
+                temp->next=l1;
+                temp=l1;
+                l1=l1->next;
+                if(l1==NULL){
+                    temp->next=l2;
+                    break;
+                }
+            }
+            else{
+                temp->next=l2;
+                temp=l2;
+                l2=l2->next;
+                if(l2==NULL){
+                    temp->next=l1;
+                    break;
+                }
+            }    
+        }
+    }
+    return root;
+}
